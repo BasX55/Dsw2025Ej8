@@ -2,14 +2,29 @@
 
 public class CuentaBancaria
 {
-    private TipoCuenta _tipo;
-    private string _numero;
-    private decimal _saldo;
-    private Estado _estado;
-    private decimal _tasaDeInteres;
-    private decimal _limiteDeDescubierto;
-    private decimal _comision;
-    private string[] _titulares;
+    public TipoCuenta _tipo{ get { return _tipo; } private set { _tipo = value; } }
+    public string _numero { get { return _numero; } private set { _numero = value; } }
+    public decimal _saldo { get { return _saldo } private set { _saldo = value; } }
+
+    public Estado _estado { get { return _estado; } private set { _estado = value; } }
+    public decimal _tasaDeInteres { get { return _tasaDeInteres; } private set { guardardecimal(ref value); } }
+    public decimal _limiteDeDescubierto { get { return _limiteDeDescubierto; } private set { guardardecimal(ref value); } }
+    public decimal _comision { get { return _comision; } private set { guardardecimal(ref value); } }
+    public string[] _titulares { get { return _titulares; } private set { _titulares = value; } }
+
+
+
+    public void guardardecimal(ref decimal valor)
+    {
+        if (valor >= 0)
+        {
+            _saldo = valor;
+        }
+        else
+        {
+            throw new ArgumentException("El valor ingresado no es valido");
+        }
+    }
 
     public CuentaBancaria(string numero, decimal saldo, TipoCuenta tipo, string[] titulares)
     {
@@ -19,67 +34,7 @@ public class CuentaBancaria
         _estado = Estado.Activa;
         _titulares = titulares;
     }
-    #region Getters/Setters
-    public string GetNumero()
-    {
-        return _numero;
-    }
-
-    public decimal GetSaldo()
-    {
-        return _saldo;
-    }
-    public TipoCuenta GetTipo()
-    {
-        return _tipo;
-    }
-
-    public Estado GetEstado()
-    {
-        return _estado;
-    }
-
-    public void SetEstado(Estado estado)
-    {
-        _estado = estado;
-    }
-
-    public decimal GetTasaDeInteres()
-    {
-        return _tasaDeInteres;
-    }
-
-    public void SetTasaDeInteres(decimal tasaDeInteres)
-    {
-        _tasaDeInteres = tasaDeInteres;
-    }
-
-    public decimal GetLimiteDeDescubierto()
-    {
-        return _limiteDeDescubierto;
-    }
-
-    public void SetLimiteDeDescubierto(decimal limiteDeDescubierto)
-    {
-        _limiteDeDescubierto = limiteDeDescubierto;
-    }
-
-    public decimal GetComision()
-    {
-        return _comision;
-    }
-
-    public void SetComision(decimal comision)
-    {
-        _comision = comision;
-    }
-
-    public string[] GetTitulares()
-    {
-        return _titulares;
-    }
-    #endregion
-
+ 
     public void Depositar(decimal monto)
     {
         if (_tipo == TipoCuenta.CajaDeAhorro)
