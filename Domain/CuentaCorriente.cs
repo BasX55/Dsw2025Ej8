@@ -29,7 +29,7 @@ namespace Dsw2025Ej8.Domain
             if (Saldo < 0)
             {
                 Estado = Estado.Suspendida;
-                throw new SaldoInsuficienteException();
+                throw new SaldoInsuficiente();
             }
         }
     }

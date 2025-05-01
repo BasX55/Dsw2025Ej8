@@ -24,7 +24,7 @@ public abstract class CuentaBancaria
         }
         else
         {
-            throw new MontoNoValidoException();
+            throw new MontoNoValido();
         }
     }
 
@@ -40,7 +40,7 @@ public abstract class CuentaBancaria
     {
         if (Estado != Estado.Activa)
         {
-            throw new CuentaNoActivaException(Estado.ToString());
+            throw new CuentaNoActiva(Estado.ToString());
         }
     }
     public abstract void Depositar(decimal monto);
