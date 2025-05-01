@@ -1,4 +1,6 @@
-﻿namespace Dsw2025Ej8.Domain;
+﻿using static Dsw2025Ej8.Domain.Exceptiones;
+
+namespace Dsw2025Ej8.Domain;
 
 public abstract class CuentaBancaria
 {
@@ -22,7 +24,7 @@ public abstract class CuentaBancaria
         }
         else
         {
-            throw new ArgumentException("El valor ingresado no es valido");
+            throw new MontoNoValidoException();
         }
     }
 
@@ -32,6 +34,14 @@ public abstract class CuentaBancaria
         Saldo = saldo;
         Estado = Estado.Activa;
         Titulares = titulares ?? [];
+    }
+
+    protected void VerificarCuentaActiva()
+    {
+        if (Estado != Estado.Activa)
+        {
+            throw new CuentaNoActivaException(Estado.ToString());
+        }
     }
     public abstract void Depositar(decimal monto);
     

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Dsw2025Ej8.Domain.Exceptiones;
 
 namespace Dsw2025Ej8.Domain
 {
@@ -18,6 +19,8 @@ namespace Dsw2025Ej8.Domain
 
         public override void Retirar(decimal monto)
         {
+            VerificarCuentaActiva();
+
             guardardecimal(ref monto);
             if (Saldo - monto >= -LimiteDeDescubierto)
             {
@@ -26,6 +29,7 @@ namespace Dsw2025Ej8.Domain
             if (Saldo < 0)
             {
                 Estado = Estado.Suspendida;
+                throw new SaldoInsuficienteException();
             }
         }
     }
