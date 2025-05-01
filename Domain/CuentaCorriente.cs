@@ -8,18 +8,18 @@ namespace Dsw2025Ej8.Domain
 {
     public class CuentaCorriente : CuentaBancaria 
     {
-        public CuentaCorriente(string numero, decimal saldo, string[] titulares) : base(numero, saldo, titulares) { }
+        public CuentaCorriente(string numero, decimal saldo, string[] titulares = null) : base(numero, saldo, titulares) { }
         public override void Depositar(decimal monto)
         {
             guardardecimal(ref monto);
-            monto -= monto * _comision;
+            monto -= monto * Comision;
             Saldo += monto;
         }
 
         public override void Retirar(decimal monto)
         {
             guardardecimal(ref monto);
-            if (Saldo - monto >= -_limiteDeDescubierto)
+            if (Saldo - monto >= -LimiteDeDescubierto)
             {
                 Saldo -= monto;
             }
