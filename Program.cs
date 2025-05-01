@@ -6,7 +6,7 @@ namespace Dsw2025Ej8
     {
         static void Main(string[] args)
         {
-            
+            Iniciar.Prueba();
         }
     }
 }
