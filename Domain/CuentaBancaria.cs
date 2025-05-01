@@ -1,16 +1,16 @@
 ﻿namespace Dsw2025Ej8.Domain;
 
-public class CuentaBancaria
+public abstract class CuentaBancaria
 {
-    public TipoCuenta _tipo{ get { return _tipo; } private set { _tipo = value; } }
-    public string _numero { get { return _numero; } private set { _numero = value; } }
-    public decimal _saldo { get { return _saldo } private set { _saldo = value; } }
+    
+    public string Numero { get; protected set; }
+    public decimal Saldo { get; protected set; }
 
-    public Estado _estado { get { return _estado; } private set { _estado = value; } }
-    public decimal _tasaDeInteres { get { return _tasaDeInteres; } private set { guardardecimal(ref value); } }
-    public decimal _limiteDeDescubierto { get { return _limiteDeDescubierto; } private set { guardardecimal(ref value); } }
-    public decimal _comision { get { return _comision; } private set { guardardecimal(ref value); } }
-    public string[] _titulares { get { return _titulares; } private set { _titulares = value; } }
+    public Estado Estado { get; protected set; }
+    public decimal _tasaDeInteres { get; init; }
+    public decimal _limiteDeDescubierto { get { return _limiteDeDescubierto; } protected set { guardardecimal(ref value); } }
+    public decimal _comision { get { return _comision; } protected set { guardardecimal(ref value); } }
+    public string[] _titulares { get; protected set; }
 
 
 
@@ -18,7 +18,7 @@ public class CuentaBancaria
     {
         if (valor >= 0)
         {
-            _saldo = valor;
+            Saldo = valor;
         }
         else
         {
@@ -26,52 +26,15 @@ public class CuentaBancaria
         }
     }
 
-    public CuentaBancaria(string numero, decimal saldo, TipoCuenta tipo, string[] titulares)
+    public CuentaBancaria(string numero, decimal saldo, string[] titulares)
     {
-        _numero = numero;
-        _saldo = saldo;
-        _tipo = tipo;
-        _estado = Estado.Activa;
+        Numero = numero;
+        Saldo = saldo;
+        Estado = Estado.Activa;
         _titulares = titulares;
     }
- 
-    public void Depositar(decimal monto)
-    {
-        if (_tipo == TipoCuenta.CajaDeAhorro)
-        {
-            _saldo += monto;
-        }
-        else if (_tipo == TipoCuenta.CuentaCorriente)
-        {
-            monto -= monto * _comision;
-            _saldo += monto;
-        }
-    }
-
-    public void Retirar(decimal monto)
-    {
-        if (_tipo == TipoCuenta.CajaDeAhorro)
-        {
-            _saldo -= monto;
-        }
-        else if (_tipo == TipoCuenta.CuentaCorriente)
-        {
-            if (_saldo - monto >= -_limiteDeDescubierto)
-            {
-                _saldo -= monto;
-            }
-            if (_saldo < 0)
-            {
-                _estado = Estado.Suspendida;
-            }
-        }
-    }
-
-    public void AplicarInteres()
-    {
-        if (_tipo == TipoCuenta.CajaDeAhorro)
-        {
-            _saldo += _saldo * _tasaDeInteres;
-        }
-    }
+    public abstract void Depositar(decimal monto);
+    
+    public abstract void Retirar(decimal monto);
+    
 }
