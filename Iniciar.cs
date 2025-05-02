@@ -102,20 +102,14 @@ namespace Dsw2025Ej8
                     $"Estado de la cuenta: {cuentaCor2.Estado}. Limite de descubierto: -${cuentaCor2.LimiteDeDescubierto}");
                 Console.WriteLine("\nQuiere retirar $400 a la cuenta");
                 cuentaCor2.Retirar(400);
-                Console.WriteLine("\nQuiere depositar $6000 en la cuenta");
-                cuentaCor2.Depositar(6000);
-                Console.WriteLine("\nQuiere retirar $800 en la cuenta");
-                cuentaCor2.Retirar(3000);
+                
                 
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            finally
-            {
-                Console.WriteLine("\nFin de la prueba");
-            }
+            
         }
     }
 }
