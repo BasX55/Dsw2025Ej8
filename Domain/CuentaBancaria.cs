@@ -9,9 +9,9 @@ public abstract class CuentaBancaria
     public decimal Saldo { get; protected set; }
 
     public Estado Estado { get; protected set; }
-    public decimal TasaDeInteres { get; protected init; }
-    public decimal LimiteDeDescubierto { get; protected init;  }
-    public decimal Comision { get; protected init; }
+    public decimal TasaDeInteres { get; init; }
+    public decimal LimiteDeDescubierto { get; init;  }
+    public decimal Comision { get; init; }
     public string[] Titulares { get; protected set; }
 
 
@@ -36,13 +36,7 @@ public abstract class CuentaBancaria
         Titulares = titulares ?? [];
     }
 
-    protected void VerificarCuentaActiva()
-    {
-        if (Estado != Estado.Activa)
-        {
-            throw new CuentaNoActiva(Estado.ToString());
-        }
-    }
+    
     public abstract void Depositar(decimal monto);
     
     public abstract void Retirar(decimal monto);
