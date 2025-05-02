@@ -25,6 +25,13 @@ namespace Dsw2025Ej8
                 Comision = 0.05m
             };
 
+            CuentaCorriente cuentaCor2 = new CuentaCorriente("123", 1000, new[] { "Juan Perez", "Maria Lopez" })
+            {
+                LimiteDeDescubierto = 2000,
+                Comision = 0.02m
+
+            };
+
             try
             {
                 Console.WriteLine($"{cajaDeAhorro1.Titulares[0]} y {cajaDeAhorro1.Titulares[1]} tienen ${cajaDeAhorro1.Saldo} en la cuenta con número {cajaDeAhorro1.Numero}. Estado de la cuenta: {cajaDeAhorro1.Estado}");
@@ -67,9 +74,47 @@ namespace Dsw2025Ej8
                 Console.WriteLine("\nQuiere retirar $8000 en la cuenta");
                 cuentaCor1.Retirar(8000);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+
+            try
+            {
+                Console.WriteLine($"{cuentaCor2.Titulares[0]} y {cuentaCor2.Titulares[1]} tienen ${cuentaCor2.Saldo} en la cuenta con número {cuentaCor2.Numero}. " +
+                    $"Estado de la cuenta: {cuentaCor2.Estado}. Limite de descubierto: -${cuentaCor2.LimiteDeDescubierto}");
+                Console.WriteLine("\nQuiere retirar $400 a la cuenta");
+                cuentaCor2.Retirar(400);
+                Console.WriteLine("\nQuiere retirar $800 en la cuenta");
+                cuentaCor2.Retirar(800);
+                Console.WriteLine("\nQuiere retirar $400 a la cuenta");
+                cuentaCor2.Retirar(4000);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            try
+            {
+                Console.WriteLine($"{cuentaCor2.Titulares[0]} y {cuentaCor2.Titulares[1]} tienen ${cuentaCor2.Saldo} en la cuenta con número {cuentaCor2.Numero}. " +
+                    $"Estado de la cuenta: {cuentaCor2.Estado}. Limite de descubierto: -${cuentaCor2.LimiteDeDescubierto}");
+                Console.WriteLine("\nQuiere retirar $400 a la cuenta");
+                cuentaCor2.Retirar(400);
+                Console.WriteLine("\nQuiere depositar $6000 en la cuenta");
+                cuentaCor2.Depositar(6000);
+                Console.WriteLine("\nQuiere retirar $800 en la cuenta");
+                cuentaCor2.Retirar(3000);
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Console.WriteLine("\nFin de la prueba");
             }
         }
     }
